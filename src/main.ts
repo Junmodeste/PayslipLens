@@ -66,7 +66,8 @@ $("#app").innerHTML = `
         <p><strong>Drop your payslip here</strong> or</p>
         <div class="row">
           <button class="btn btn-primary" id="choose" type="button">Choose a file</button>
-          <button class="btn btn-ghost" id="sample" type="button">Try a sample payslip</button>
+          <button class="btn btn-ghost" id="sample" type="button" data-sample="payslip-ok.pdf">Try a correct sample</button>
+          <button class="btn btn-ghost" id="sample-errors" type="button" data-sample="payslip-errors.pdf">Try a sample with errors</button>
         </div>
         <p class="hint">PDF, PNG or JPEG, up to 5 MB. Nothing is uploaded or stored.</p>
         <input id="file" type="file" accept="application/pdf,image/png,image/jpeg" hidden />
@@ -407,11 +408,14 @@ fileInput.addEventListener("change", () => {
   fileInput.value = "";
   if (file) void analyze(file);
 });
-$("#sample").addEventListener("click", async () => {
-  void prepareNano();
-  const blob = await (await fetch("/samples/payslip-ok.pdf")).blob();
-  void analyze(new File([blob], "sample-payslip.pdf", { type: "application/pdf" }));
-});
+for (const button of document.querySelectorAll<HTMLButtonElement>("[data-sample]")) {
+  button.addEventListener("click", async () => {
+    void prepareNano();
+    const name = button.dataset.sample!;
+    const blob = await (await fetch(`/samples/${name}`)).blob();
+    void analyze(new File([blob], name, { type: "application/pdf" }));
+  });
+}
 
 const drop = $("#drop");
 drop.addEventListener("dragover", (e) => {

@@ -81,6 +81,23 @@ test("net pay mismatch is flagged", () => {
   assert.equal(checkPayslip({ ...ok, net_pay: 250_000 }).find((c) => c.id === "net")?.status, "warning");
 });
 
+test("the 'with errors' sample payslip is flagged as designed", () => {
+  // Figures of public/samples/payslip-errors.pdf
+  const checks = checkPayslip({
+    gross_salary: 500_000, taxable_gross: 450_000, transport_allowance: 50_000,
+    cnps_employee: 31_500, its: 70_500, cmu_employee: 1_500,
+    total_deductions: 103_500, net_pay: 396_500, tax_parts: 3,
+  });
+  const byId = Object.fromEntries(checks.map((c) => [c.id, c]));
+  assert.equal(byId.cnps.status, "warning");
+  assert.equal(byId.cnps.expected, 28_350);
+  assert.equal(byId.its.status, "warning");
+  assert.equal(byId.its.expected, 48_500);
+  assert.equal(byId.cmu.status, "ok");
+  assert.equal(byId.transport.status, "info");
+  assert.equal(byId.net.status, "ok");
+});
+
 test("net check falls back to legal deductions when no total is shown", () => {
   assert.equal(checkPayslip({ ...ok, total_deductions: 0 }).find((c) => c.id === "net")?.status, "ok");
 });

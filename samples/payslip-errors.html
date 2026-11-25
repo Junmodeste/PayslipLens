@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Bulletin de paie - exemple fictif avec erreurs</title>
+<style>
+  body { font: 12px Arial, sans-serif; margin: 32px; color: #111; }
+  h1 { font-size: 18px; margin: 0 0 4px; }
+  .note { color: #b91c1c; font-weight: bold; }
+  .head { display: flex; justify-content: space-between; margin: 16px 0; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { border: 1px solid #999; padding: 5px 8px; }
+  th { background: #eee; text-align: left; }
+  td.n { text-align: right; }
+  .total td { font-weight: bold; background: #f5f5f5; }
+</style>
+</head>
+<body>
+  <!-- Deliberate errors for the demo:
+       1. CNPS computed on 500,000 (gross incl. transport) instead of 450,000 taxable gross.
+       2. ITS without the family reduction (RICF) for 3 parts: 70,500 instead of 48,500.
+       Transport allowance 50,000 exceeds the 30,000 exemption (info). -->
+  <h1>BULLETIN DE PAIE</h1>
+  <div class="note">EXEMPLE FICTIF - données inventées pour démonstration</div>
+  <div class="head">
+    <div>Entreprise Démo SA<br>Bouaké, Côte d'Ivoire</div>
+    <div>Période : Octobre 2026<br>Salarié : Awa Exemple<br>Situation : Mariée, 2 enfants<br>Nombre de parts : 3</div>
+  </div>
+  <table>
+    <tr><th>Rubrique</th><th>Base</th><th>Taux</th><th>Gain</th><th>Retenue</th><th>Part patronale</th></tr>
+    <tr><td>Salaire de base</td><td class="n">400 000</td><td></td><td class="n">400 000</td><td></td><td></td></tr>
+    <tr><td>Prime de rendement</td><td></td><td></td><td class="n">50 000</td><td></td><td></td></tr>
+    <tr class="total"><td>Brut imposable</td><td></td><td></td><td class="n">450 000</td><td></td><td></td></tr>
+    <tr><td>Indemnité de transport</td><td></td><td></td><td class="n">50 000</td><td></td><td></td></tr>
+    <tr class="total"><td>Salaire brut</td><td></td><td></td><td class="n">500 000</td><td></td><td></td></tr>
+    <tr><td>CNPS Retraite</td><td class="n">500 000</td><td class="n">6,30 %</td><td></td><td class="n">31 500</td><td class="n">38 500</td></tr>
+    <tr><td>ITS</td><td class="n">450 000</td><td></td><td></td><td class="n">70 500</td><td></td></tr>
+    <tr><td>CMU (3 personnes)</td><td></td><td></td><td></td><td class="n">1 500</td><td class="n">1 500</td></tr>
+    <tr><td>Prestations familiales</td><td class="n">75 000</td><td class="n">5,75 %</td><td></td><td></td><td class="n">4 313</td></tr>
+    <tr><td>Accident du travail</td><td class="n">75 000</td><td class="n">2 %</td><td></td><td></td><td class="n">1 500</td></tr>
+    <tr class="total"><td>Total retenues</td><td></td><td></td><td></td><td class="n">103 500</td><td></td></tr>
+    <tr class="total"><td>NET À PAYER</td><td></td><td></td><td class="n">396 500</td><td></td><td></td></tr>
+  </table>
+</body>
+</html>

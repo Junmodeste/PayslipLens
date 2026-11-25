@@ -2,6 +2,10 @@
 
 Format: [date] | what went wrong | rule to avoid it
 
+- [2026-11-25] | `const env = import.meta.env` inlined every VITE_ variable, so the App Check debug token was in the production bundle (caught before deploy) | Read `import.meta.env.X` directly; grep `dist/` for the debug token before every deploy.
+- [2026-11-25] | `.env.local` re-saved with a BOM by the user's editor: production site had no apiKey | `vite.config.ts` fails the build when Firebase vars are missing; tell users "UTF-8 without BOM".
+- [2026-11-25] | Hosted App Check failed: classic reCAPTCHA v3 is deprecated, console registers Fraud Defense (Enterprise), and no Enterprise key existed | Use `ReCaptchaEnterpriseProvider` with a Fraud Defense key (domains: web.app + firebaseapp.com); debug the exchange endpoint directly to read the real error.
+- [2026-11-25] | After App Check failures the SDK kept throttling in the same browser | Clear IndexedDB / use a fresh profile before re-testing App Check.
 - [2026-11-25] | `npm create vite -- --template react-ts` produced a vanilla TS scaffold | Check the generated package.json after scaffolding; never assume the template name.
 - [2026-11-25] | `PREFER_ON_DEVICE` would silently send the payslip to the cloud when Gemini Nano is missing | Payslip data uses `ONLY_ON_DEVICE`; any cloud call on payslip content needs explicit user consent.
 - [2026-11-25] | `npm run dev -- --port 5173` in Windows PowerShell 5.1 dropped `--`, so Vite took `5173` as its root (404) | Run `npx vite --port 5173 --strictPort` directly.

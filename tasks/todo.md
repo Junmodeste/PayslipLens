@@ -30,12 +30,12 @@ Firebase Hosting on the Spark plan (free). Apache-2.0 license.
 
 ## Plan, day by day
 - [ ] **D1, Nov 25**: Firebase project (Spark), web app, App Check debug, public GitHub repo with Apache-2.0, Vite scaffold, first hybrid `generateContent` call printing `inferenceSource`.
-  - [x] Firebase project, AI Logic, App Check registered (reCAPTCHA v3) + debug token
+  - [x] Firebase project, AI Logic, App Check registered (reCAPTCHA Enterprise / Fraud Defense) + debug token
   - [x] Vite TS scaffold, Apache-2.0 LICENSE, env files, `src/firebase.ts` (ONLY_ON_DEVICE + PREFER_IN_CLOUD)
   - [x] Cloud call verified: `inferenceSource = in_cloud`
   - [x] On-device call verified in user's Chrome: `inferenceSource = on_device` (needed flags: optimization-guide-on-device-model BypassPerfRequirement, prompt-api-for-gemini-nano, multimodal-input)
   - [ ] First commit + public GitHub repo (needs user OK)
-  - [ ] Put reCAPTCHA v3 site key in `.env.local` (needed for the hosted build, D4)
+  - [x] Fraud Defense key ID in `.env.local`
 - [ ] **D2, Nov 26**: pdf.js + image input, JSON extraction schema on Nano, CI rules engine (rates checked against `l10n_ci_hr_payroll` + official sources), unit tests for the engine.
   - [x] `src/input.ts`: PDF to text rows (pdf.js), scanned PDF to PNG, JPEG/PNG passthrough; verified on the sample PDF
   - [x] `src/payslip.ts`: JSON schema as on-device `responseConstraint`, ONLY_ON_DEVICE extraction, no names/IDs extracted
