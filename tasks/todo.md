@@ -44,8 +44,16 @@ Firebase Hosting on the Spark plan (free). Apache-2.0 license.
   - [x] Fictitious sample `public/samples/payslip-ok.pdf`
   - [x] Nano extraction verified on the sample in user's Chrome: 10/10 values exact, 4 checks ok, 59 s (was 109 s with a `lines` array)
   - [x] PDF rows tagged with header columns (fixed employer/employee CNPS confusion)
-  - [ ] D3: lazy-load pdf.js (bundle > 500 kB warning)
-  - [ ] D3: extraction speed (59 s on user's machine): progress UI, try shorter instructions, measure again
+  - [x] D3: lazy-load pdf.js (main bundle 134 kB)
+  - [ ] D3: extraction speed (59 s on user's machine): progress UI with timer done; shorter instructions still to try
+- [ ] **D3 status, Nov 25**
+  - [x] Full UI: hero, Nano status + one-click enable, drop zone + sample, progress steps with timer, figures, checks, editable tax parts, line table with on-device Explain, Q&A with anonymized preview before sending
+  - [x] `anonymize.ts` (salary band, percentages, masked question) + tests; `retry.ts` for cloud 429/500/503 + tests (20 tests)
+  - [x] Remote Config `cloud_model` + `ci_rules` (code defaults if absent)
+  - [x] Consent-based cloud extraction when Nano is unavailable (badge "Cloud · with your consent")
+  - [x] Verified in built-in browser: cloud path, Q&A, tax parts re-check
+  - [x] Verified in user's Chrome: on-device extraction, Explain line, cloud Q&A (user confirmed)
+  - [x] Cloud Q&A switched to non-streaming (stream parse-failed 2/4)
 - [ ] **D3, Nov 27**: full UI (upload, annotated payslip, anomalies, Q&A), anonymizer, cloud Q&A, Remote Config, EN + FR.
 - [ ] **D4, Nov 28**: 3 fictitious sample payslips, reCAPTCHA Enterprise, deploy to Firebase Hosting, README (value proposition, setup, architecture, Chrome flag instructions), secret scan.
 - [ ] **D5, Nov 29**: 3-min video script and recording, all Devpost texts in English, thumbnail and gallery images.

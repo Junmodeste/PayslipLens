@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
-import { getAI, getGenerativeModel, GoogleAIBackend, InferenceMode } from "firebase/ai";
+import { getAI, GoogleAIBackend } from "firebase/ai";
 
 const env = import.meta.env;
 
@@ -24,23 +24,5 @@ initializeAppCheck(app, {
   isTokenAutoRefreshEnabled: true,
 });
 
+// Models live next to their use: payslip.ts (extraction), assistant.ts (explain, Q&A).
 export const ai = getAI(app, { backend: new GoogleAIBackend() });
-
-export const CLOUD_MODEL = "gemini-3.5-flash-lite";
-
-// Payslip content: on-device only. It must never reach the cloud implicitly.
-export const privateModel = getGenerativeModel(ai, {
-  mode: InferenceMode.ONLY_ON_DEVICE,
-  onDeviceParams: {
-    createOptions: {
-      expectedInputs: [{ type: "text", languages: ["en"] }],
-      expectedOutputs: [{ type: "text", languages: ["en"] }],
-    },
-  },
-});
-
-// Anonymized questions only: cloud first, on-device as fallback.
-export const anonymizedModel = getGenerativeModel(ai, {
-  mode: InferenceMode.PREFER_IN_CLOUD,
-  inCloudParams: { model: CLOUD_MODEL },
-});

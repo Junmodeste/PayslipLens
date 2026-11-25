@@ -2,6 +2,8 @@
 // Mode ONLY_ON_DEVICE: if Nano is missing this throws; it never falls back to the cloud.
 import { getGenerativeModel, InferenceMode, type Part } from "firebase/ai";
 import { ai } from "./firebase";
+import { DEFAULT_CLOUD_MODEL } from "./config";
+import { withRetry } from "./retry";
 import type { PayslipInput } from "./input";
 
 // Only the figures the rules engine needs. A short output keeps on-device
@@ -74,6 +76,32 @@ const extractModel = getGenerativeModel(ai, {
   },
 });
 
+// Fallback for browsers without Gemini Nano. The UI calls it only after the
+// user explicitly agrees to send this payslip to the cloud (ONLY_IN_CLOUD).
+const cloudExtractModel = getGenerativeModel(ai, {
+  mode: InferenceMode.ONLY_IN_CLOUD,
+  inCloudParams: {
+    model: DEFAULT_CLOUD_MODEL,
+    systemInstruction: INSTRUCTIONS,
+    generationConfig: { responseMimeType: "application/json", responseJsonSchema: PAYSLIP_SCHEMA },
+  },
+});
+
+export async function extractPayslipInCloud(input: PayslipInput, consent: true): Promise<Payslip> {
+  if (consent !== true) throw new Error("Cloud extraction needs the user's consent.");
+  const { response } = await withRetry(() => cloudExtractModel.generateContent(toParts(input)));
+  return parsePayslip(response.text());
+}
+
+function toParts(input: PayslipInput): Part[] {
+  return input.kind === "text"
+    ? [{ type: "text", text: `Payslip text (rows separated by newlines, cells by "|"):\n${input.text}` }]
+    : [
+        { type: "text", text: "Extract this payslip." },
+        { type: "inlineData", inlineData: { mimeType: input.mimeType, data: input.base64 } },
+      ];
+}
+
 // Each model instance owns its own on-device session: it must be initialized
 // on a user gesture (Prompt API rule) before the first generateContent.
 export function prepareExtraction(onProgress?: (p: number) => void): Promise<void> {
@@ -83,13 +111,7 @@ export function prepareExtraction(onProgress?: (p: number) => void): Promise<voi
 const TIMEOUT_MS = 120_000;
 
 export async function extractPayslip(input: PayslipInput): Promise<Payslip> {
-  const parts: Part[] =
-    input.kind === "text"
-      ? [{ type: "text", text: `Payslip text (rows separated by newlines, cells by "|"):\n${input.text}` }]
-      : [
-          { type: "text", text: "Extract this payslip." },
-          { type: "inlineData", inlineData: { mimeType: input.mimeType, data: input.base64 } },
-        ];
+  const parts = toParts(input);
   let timer: ReturnType<typeof setTimeout> | undefined;
   const timeout = new Promise<never>((_, reject) => {
     timer = setTimeout(() => reject(new Error("On-device extraction timed out.")), TIMEOUT_MS);

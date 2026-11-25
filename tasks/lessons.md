@@ -10,4 +10,7 @@ Format: [date] | what went wrong | rule to avoid it
 - [2026-11-25] | `AI/api-not-enabled` in Chrome: only the multimodal flag was on, so `LanguageModel` was undefined | Judges' guide must list all 3 flags (`optimization-guide-on-device-model` = BypassPerfRequirement, `prompt-api-for-gemini-nano`, `prompt-api-for-gemini-nano-multimodal-input`) plus a `typeof LanguageModel` check.
 - [2026-11-25] | Extraction hung: only the smoke-test model had `initializeDeviceModel()`; each GenerativeModel owns its own on-device session | Initialize every on-device model on the user gesture, and wrap on-device calls in a timeout.
 - [2026-11-25] | Nano took the employer amount for CNPS: flattened PDF rows lost empty cells, so columns were ambiguous; a `lines` array made output slow (109 s) | Tag each value with its header column before prompting; keep the on-device JSON output minimal and build tables deterministically.
+- [2026-11-25] | Cloud Gemini returned `[500] high demand` during a test | Wrap every cloud call in `withRetry` (429/500/503 with backoff).
+- [2026-11-25] | Badge said "Cloud · anonymized" for a consented full-payslip cloud extraction | Privacy labels must describe exactly what was sent; check each badge per path.
+- [2026-11-25] | Cloud `generateContentStream` failed with `AI/parse-failed` on 2 of 4 calls; `generateContent` passed 4 of 4 | Use non-streaming calls for the cloud (short answers); stream only on-device output.
 - [2026-11-25] | Gemini Nano does not accept PDF input | Extract PDF text locally with pdf.js before calling the on-device model.
