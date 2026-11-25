@@ -4,7 +4,7 @@
 
 **Understand your payslip. Privately.**
 
-PayslipLens reads a Côte d'Ivoire payslip with **Gemini Nano inside Chrome**, checks the legal deductions (CNPS, ITS, CMU) with exact math, and explains every line. The payslip never leaves the device. Only an anonymized summary goes to the cloud, and only when the user asks a question and approves the exact text.
+PayslipLens reads an Ivory Coast payslip with **Gemini Nano inside Chrome**, checks the legal deductions (CNPS, ITS, CMU) with exact math, and explains every line. The payslip never leaves the device. Only an anonymized summary goes to the cloud, and only when the user asks a question and approves the exact text.
 
 Built for **#BuildHybridAI 2026** with **Firebase AI Logic hybrid inference** (Web / Chrome).
 
@@ -13,7 +13,7 @@ Built for **#BuildHybridAI 2026** with **Firebase AI Logic hybrid inference** (W
 
 ## The problem
 
-Most salaried workers in Côte d'Ivoire cannot read their payslip. Since the January 2024 tax reform, the income tax (ITS) uses a new progressive scale with a family reduction, and the CNPS retirement contribution has a ceiling. Errors in these deductions often go unnoticed: a wrong base, a family reduction left out, a transport allowance taxed or not taxed.
+Most salaried workers in Ivory Coast cannot read their payslip. Since the January 2024 tax reform, the income tax (ITS) uses a new progressive scale with a family reduction, and the CNPS retirement contribution has a ceiling. Errors in these deductions often go unnoticed: a wrong base, a family reduction left out, a transport allowance taxed or not taxed.
 
 The obvious fix, "upload your payslip to an AI", asks people to send their salary, employer and family situation to a server. That is exactly the data they should keep private.
 
@@ -39,7 +39,7 @@ Every result shows where it ran, from `response.inferenceSource`: **On this devi
 - [`src/assistant.ts`](src/assistant.ts): on-device line explanations (`generateContentStream`) and cloud questions (`PREFER_IN_CLOUD`), returning `inferenceSource`.
 - [`src/config.ts`](src/config.ts): **Remote Config**, with `cloud_model` and `ci_rules`. Legal rates (for example a new ITS scale) can change without a release.
 - [`src/anonymize.ts`](src/anonymize.ts): what may leave the device.
-- [`src/rules.ts`](src/rules.ts): Côte d'Ivoire payroll rules, 2024 reform.
+- [`src/rules.ts`](src/rules.ts): Ivory Coast payroll rules, 2024 reform.
 
 Firebase products used: **AI Logic** (hybrid inference), **App Check** (reCAPTCHA Enterprise / Fraud Defense), **Remote Config**, **Hosting**.
 
@@ -90,7 +90,7 @@ In local development, App Check uses the debug provider: the browser console pri
 
 ## Built during the submission period
 
-This project was created from scratch during #BuildHybridAI 2026 (started November 25, 2026). The payroll rates were cross-checked against an Odoo payroll module for Côte d'Ivoire that the author maintains. No code from it was reused. Third-party code: [Firebase JS SDK](https://github.com/firebase/firebase-js-sdk) and [pdf.js](https://github.com/mozilla/pdf.js) (Apache-2.0), [Vite](https://vite.dev) (MIT). Icon shapes follow [Lucide](https://lucide.dev) (ISC).
+This project was created from scratch during #BuildHybridAI 2026 (started November 25, 2026). The payroll rates were cross-checked against an Odoo payroll module for Ivory Coast that the author maintains. No code from it was reused. Third-party code: [Firebase JS SDK](https://github.com/firebase/firebase-js-sdk) and [pdf.js](https://github.com/mozilla/pdf.js) (Apache-2.0), [Vite](https://vite.dev) (MIT). Icon shapes follow [Lucide](https://lucide.dev) (ISC).
 
 ## Disclaimer
 

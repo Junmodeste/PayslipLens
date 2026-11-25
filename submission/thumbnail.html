@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; width: 1500px; height: 1000px; overflow: hidden; }
+  body {
+    font-family: "Segoe UI", system-ui, sans-serif; color: #fff;
+    background: radial-gradient(circle at 80% 20%, #2b5285 0%, #1e3a5f 45%, #0f1f35 100%);
+    display: grid; grid-template-columns: 1fr 520px; align-items: center; gap: 40px; padding: 0 90px; box-sizing: border-box;
+  }
+  .brand { display: flex; align-items: center; gap: 18px; font-size: 40px; font-weight: 700; opacity: .9; }
+  .brand svg { width: 56px; height: 56px; }
+  h1 { font-size: 96px; line-height: 1.02; margin: 36px 0 28px; letter-spacing: -2px; }
+  h1 span { color: #4ade80; }
+  .sub { font-size: 34px; line-height: 1.35; color: #cbd5e1; max-width: 760px; }
+  .chips { display: flex; gap: 14px; margin-top: 44px; flex-wrap: wrap; }
+  .chip { font-size: 26px; font-weight: 600; padding: 10px 22px; border-radius: 999px; }
+  .local { background: #dcfce7; color: #166534; }
+  .cloud { background: #dbeafe; color: #1e40af; }
+  .card { background: #fff; color: #0f172a; border-radius: 28px; padding: 36px; box-shadow: 0 30px 80px rgba(0,0,0,.35); }
+  .card h2 { font-size: 30px; margin: 0 0 22px; }
+  .row { display: flex; gap: 14px; align-items: flex-start; padding: 16px; border-radius: 14px; margin-bottom: 12px; font-size: 23px; line-height: 1.3; }
+  .ok { background: #dcfce7; }
+  .warn { background: #fef3c7; }
+  .row svg { width: 30px; height: 30px; flex: none; }
+  .badge { display: inline-flex; gap: 8px; align-items: center; background: #dcfce7; color: #15803d; font-weight: 700; font-size: 20px; padding: 6px 16px; border-radius: 999px; margin-bottom: 18px; }
+  .badge svg { width: 20px; height: 20px; }
+</style>
+</head>
+<body>
+  <div>
+    <div class="brand">
+      <svg viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#fff"/><path d="M10 7h9l5 5v13a1 1 0 0 1-1 1H10a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Z" fill="#1E3A5F"/><path d="M12.5 17.5l2.5 2.5 5-5" stroke="#4ade80" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      PayslipLens
+    </div>
+    <h1>Understand your payslip.<br><span>Privately.</span></h1>
+    <p class="sub">Gemini Nano reads it inside Chrome and checks CNPS, ITS and CMU. Your salary never leaves your device.</p>
+    <div class="chips">
+      <span class="chip local">On-device: Gemini Nano</span>
+      <span class="chip cloud">Cloud: anonymized only</span>
+    </div>
+  </div>
+  <div class="card">
+    <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>On this device</span>
+    <h2>Checks</h2>
+    <div class="row warn"><svg viewBox="0 0 24 24" fill="none" stroke="#b45309" stroke-width="2.4" stroke-linecap="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>CNPS should be about 28,350 FCFA, payslip shows 31,500</div>
+    <div class="row warn"><svg viewBox="0 0 24 24" fill="none" stroke="#b45309" stroke-width="2.4" stroke-linecap="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>ITS should be about 48,500 FCFA with 3 tax parts</div>
+    <div class="row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>CMU covers 3 persons at 500 FCFA each</div>
+    <div class="row ok"><svg viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>Net pay adds up</div>
+  </div>
+</body>
+</html>

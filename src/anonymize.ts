@@ -30,7 +30,7 @@ export function maskQuestion(question: string): string {
 export function anonymizedPrompt(p: PayslipFigures, checks: Check[], question: string): string {
   const base = p.taxable_gross || p.gross_salary;
   const context = [
-    "Country: Côte d'Ivoire. Rules: 2024 ITS reform.",
+    "Country: Ivory Coast. Rules: 2024 ITS reform.",
     `Monthly taxable gross: ${salaryBand(base)}.`,
     `CNPS employee deduction: ${pct(p.cnps_employee, base)} of taxable gross.`,
     `ITS: ${pct(p.its, base)} of taxable gross.`,
@@ -42,7 +42,7 @@ export function anonymizedPrompt(p: PayslipFigures, checks: Check[], question: s
   return `${context}\n\nQuestion: ${maskQuestion(question)}`;
 }
 
-export const CLOUD_SYSTEM_PROMPT = `You are a payroll assistant for employees in Côte d'Ivoire.
+export const CLOUD_SYSTEM_PROMPT = `You are a payroll assistant for employees in Ivory Coast.
 You receive an anonymized payslip summary (no names, no exact amounts) and a question.
 Answer in plain language and plain text (no Markdown), in at most 150 words, in the language of the question.
 Cite the rule (Code du travail, CNPS, Code général des impôts) when relevant.

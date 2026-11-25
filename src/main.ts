@@ -50,7 +50,7 @@ $("#app").innerHTML = `
   <main class="wrap">
     <section class="hero">
       <h1>Understand your payslip.<br><span>Privately.</span></h1>
-      <p class="lead">PayslipLens reads your Côte d'Ivoire payslip with Gemini Nano, the AI built into Chrome,
+      <p class="lead">PayslipLens reads your Ivory Coast payslip with Gemini Nano, the AI built into Chrome,
         checks CNPS, ITS and CMU against the law, and explains every line. Your salary never leaves this device.</p>
       <ol class="steps">
         <li>${icons.lock}<div><strong>Read on your device</strong><span>Gemini Nano extracts the figures inside Chrome.</span></div></li>
@@ -171,7 +171,10 @@ function renderNano(): void {
 async function detectNano(): Promise<void> {
   if (typeof LanguageModel === "undefined") nano = "unavailable";
   else {
-    const a = await LanguageModel.availability();
+    // Some environments never answer: after 8 s, treat Nano as unavailable
+    // so the consent-based fallback is offered instead of a stuck status.
+    const timeout = new Promise<string>((resolve) => setTimeout(() => resolve("timeout"), 8_000));
+    const a = await Promise.race([LanguageModel.availability().catch(() => "error"), timeout]);
     nano = a === "available" || a === "downloadable" || a === "downloading" ? a : "unavailable";
   }
   renderNano();

@@ -1,4 +1,4 @@
-// Deterministic Côte d'Ivoire payroll checks (2024 ITS reform).
+// Deterministic Ivory Coast payroll checks (2024 ITS reform).
 // The LLM extracts and explains; the math is done here, exactly.
 // Rates are defaults; they can be overridden at runtime (Remote Config).
 

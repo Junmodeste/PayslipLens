@@ -11,7 +11,7 @@ import { withRetry } from "./retry";
 
 export type Source = "on_device" | "in_cloud";
 
-const EXPLAIN_INSTRUCTIONS = `You explain one line of a Côte d'Ivoire payslip to the employee.
+const EXPLAIN_INSTRUCTIONS = `You explain one line of an Ivory Coast payslip to the employee.
 Use plain English, at most 60 words, no greeting. Say what the line is, who receives the money,
 and how it is usually computed (CNPS retirement 6.3% employee share; ITS income tax on a
 progressive monthly scale with a family reduction; CMU 500 FCFA per covered person;

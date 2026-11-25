@@ -47,7 +47,7 @@ export const PAYSLIP_SCHEMA = {
   required: ["period", ...NUMBER_FIELDS],
 };
 
-const INSTRUCTIONS = `You read payslips from Côte d'Ivoire (amounts in FCFA / XOF).
+const INSTRUCTIONS = `You read payslips from Ivory Coast (amounts in FCFA / XOF).
 Return only JSON matching the schema. Rules:
 - Amounts are plain numbers without spaces or currency ("150 000 F" -> 150000).
 - gross_salary: total gross pay ("Salaire brut", "Total brut").

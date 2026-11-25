@@ -57,6 +57,11 @@ Firebase Hosting on the Spark plan (free). Apache-2.0 license.
 - [ ] **D3, Nov 27**: full UI (upload, annotated payslip, anomalies, Q&A), anonymizer, cloud Q&A, Remote Config, EN + FR.
 - [ ] **D4, Nov 28**: 3 fictitious sample payslips, reCAPTCHA Enterprise, deploy to Firebase Hosting, README (value proposition, setup, architecture, Chrome flag instructions), secret scan.
 - [ ] **D5, Nov 29**: 3-min video script and recording, all Devpost texts in English, thumbnail and gallery images.
+  - [x] `submission/devpost.md`: every form field (name 47/60, pitch 169/200, 11 tags)
+  - [x] `submission/video-script.md` (2:55, 7 scenes) + `submission/subtitles.srt`
+  - [x] `submission/images/thumbnail.png` and `01-home.png` (1500x1000, 3:2)
+  - [x] Fix: Nano availability check times out after 8 s (status was stuck on "Checking")
+  - [ ] User: screenshots 02-04 in real Chrome with Nano, record and upload video (YouTube), fill Devpost
 - [ ] **Nov 30**: buffer, final check, submit before 18:00 Abidjan (4 h margin).
 
 ## Risks
