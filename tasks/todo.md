@@ -37,6 +37,15 @@ Firebase Hosting on the Spark plan (free). Apache-2.0 license.
   - [ ] First commit + public GitHub repo (needs user OK)
   - [ ] Put reCAPTCHA v3 site key in `.env.local` (needed for the hosted build, D4)
 - [ ] **D2, Nov 26**: pdf.js + image input, JSON extraction schema on Nano, CI rules engine (rates checked against `l10n_ci_hr_payroll` + official sources), unit tests for the engine.
+  - [x] `src/input.ts`: PDF to text rows (pdf.js), scanned PDF to PNG, JPEG/PNG passthrough; verified on the sample PDF
+  - [x] `src/payslip.ts`: JSON schema as on-device `responseConstraint`, ONLY_ON_DEVICE extraction, no names/IDs extracted
+  - [x] `src/rules.ts`: CNPS 6.3% (ceiling 3,375,000), ITS 2024 scale + RICF, CMU 500/person, transport 30,000, net check, SMIG; rates from `GitHub/CPF-CI/l10n_ci_hr_payroll`
+  - [x] 13 unit tests pass (`npm test`)
+  - [x] Fictitious sample `public/samples/payslip-ok.pdf`
+  - [x] Nano extraction verified on the sample in user's Chrome: 10/10 values exact, 4 checks ok, 59 s (was 109 s with a `lines` array)
+  - [x] PDF rows tagged with header columns (fixed employer/employee CNPS confusion)
+  - [ ] D3: lazy-load pdf.js (bundle > 500 kB warning)
+  - [ ] D3: extraction speed (59 s on user's machine): progress UI, try shorter instructions, measure again
 - [ ] **D3, Nov 27**: full UI (upload, annotated payslip, anomalies, Q&A), anonymizer, cloud Q&A, Remote Config, EN + FR.
 - [ ] **D4, Nov 28**: 3 fictitious sample payslips, reCAPTCHA Enterprise, deploy to Firebase Hosting, README (value proposition, setup, architecture, Chrome flag instructions), secret scan.
 - [ ] **D5, Nov 29**: 3-min video script and recording, all Devpost texts in English, thumbnail and gallery images.

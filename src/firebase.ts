@@ -24,7 +24,7 @@ initializeAppCheck(app, {
   isTokenAutoRefreshEnabled: true,
 });
 
-const ai = getAI(app, { backend: new GoogleAIBackend() });
+export const ai = getAI(app, { backend: new GoogleAIBackend() });
 
 export const CLOUD_MODEL = "gemini-3.5-flash-lite";
 
